@@ -1,0 +1,44 @@
+a{
+  color: black;
+  text-decoration: none;
+}
+
+.mainContent__userPosts{
+  display: flex;
+  flex-direction: column;
+}
+
+.userBlock{
+  margin-left: 10vw;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition-duration: 0.3s;
+}
+
+.userBlock:hover{
+  background-color: #b8b8b8a9;
+  width: 41%;
+  margin-left: 10.1vw;
+}
+
+.pagesNav{
+  display: flex;
+  justify-content: center;
+}
+
+.pagesNav span{
+  margin: 0 1vw;
+}
+.pageDefault{
+  font-size: large;
+  font-weight: 500;
+  transition-duration: 0.2s;
+}
+
+.pageActive{
+  font-weight: 800;
+  font-size: larger;
+  transition-duration: 0.2s;
+}

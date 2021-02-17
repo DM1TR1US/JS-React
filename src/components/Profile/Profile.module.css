@@ -1,0 +1,14 @@
+
+.mainContent__userPosts{
+  display: flex;
+  flex-direction: column;
+}
+
+textarea{
+  font-size: 300%;
+  margin-left: 5%;
+  width: 90%;
+  min-height: 150px;
+  max-height: fit-content;
+}
+

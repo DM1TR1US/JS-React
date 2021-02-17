@@ -1,0 +1,23 @@
+.app_wrapper{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.mainContent_Block{
+  display: flex;
+}
+
+.mainContent_Block__content{
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  width: 88vw;
+  height: 85vh;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+
+

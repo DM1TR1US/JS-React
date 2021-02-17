@@ -1,0 +1,35 @@
+.mainContent__userPosts{
+  display: flex;
+  flex-direction: column;
+}
+
+.user_post{
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  margin: 10px 5px;
+  border: 1px solid #04afff;
+  border-radius: 2%;
+  background-color: #95deff;
+  z-index: 0;
+}
+
+.user_post__reactionBlock{
+  align-self: flex-end;
+  width: fit-content;
+}
+
+.user_post__reaction{
+  align-self: flex-end;
+  transition-duration: 0.2s;
+}
+.user_post__reaction:hover{
+  background-color: tomato;
+}
+
+.postButton{
+  font-size: 300%;
+  height: 100px;
+  width: 90%;
+  margin-left: 5%;
+}

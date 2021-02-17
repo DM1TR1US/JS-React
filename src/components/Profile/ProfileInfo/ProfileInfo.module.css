@@ -1,0 +1,44 @@
+.mainContent__userInfo{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.userHeader{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.user_wrappers{
+  position: relative;
+  width: 100%;
+  height: 280px;
+  z-index: 0;
+}
+
+.user_name{
+  align-self: center;
+}
+
+.user_photo{
+  align-self: flex-end;
+  margin-right: 0.2vw;
+  position: absolute;
+  height: 150px;
+  width: 150px;
+  transition-duration: 0.2s;
+}
+
+.user_photo:hover{
+  height: 200px;
+  width: 200px;
+  border: 1px solid white;
+}
+
+.user_description{
+  align-self: center;
+  color: rgb(170, 170, 170);
+}

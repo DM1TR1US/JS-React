@@ -1,0 +1,19 @@
+
+.DialogMessages{
+    background-color: violet;
+    height: 100%;
+}
+
+.DialogWriter{
+    display: flex;
+    font-size: smaller;
+    margin: 0;
+    width: auto;
+}
+
+.DialogContent{
+    display: flex;
+    flex-direction: column;
+    width: 84%;
+    margin-right: 15px;
+}
