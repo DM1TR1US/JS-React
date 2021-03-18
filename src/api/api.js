@@ -9,20 +9,36 @@ const instance = axios.create({
 })
 
 export const usersAPI = {
-    getUsers (currentPage = 1, pageSize = 8) {
+    getUsers(currentPage = 1, pageSize = 8) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
             .then(response => response.data);
     },
-    changeFollowData(userId, isFollowed){
-        return isFollowed ? instance.delete(`follow/${userId}`).then(r => r.data.resultCode) 
-            : instance.post(`follow/${userId}`).then(r =>  r.data.resultCode);
+    changeFollowData(userId, isFollowed) {
+        return isFollowed ? instance.delete(`follow/${userId}`).then(r => r.data.resultCode)
+            : instance.post(`follow/${userId}`).then(r => r.data.resultCode);
     }
 }
 
-export const loginAPI = {
-    isAuth(){
-        return instance.get(`auth/me`)
-        .then(response => response);
+export const profileAPI = {
+    getProfile(userId) {
+        return instance.get(`profile/` + userId);
+    },
+    getStatus(userId) {
+        return instance.get(`profile/status/` + userId);
+    },
+    updateStatus(status) {
+        return instance.put(`profile/status`, { status });
     }
 }
- 
+
+
+export const loginAPI = {
+    isAuth() {
+        return instance.get(`auth/me`)
+            .then(response => response);
+    },
+    loginIn(data){
+        return instance.get(`auth/login`)
+    }
+}
+

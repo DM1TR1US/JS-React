@@ -1,22 +1,26 @@
+import { profileAPI } from "../api/api";
+
 const ADD_POST = "ADD-POST";
 const POST_WRITING = "POST-WRITING";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
+const SET_STATUS = "SET-STATUS";
 
 let initialState = {
-        postData: [
-            { id: 4, UserName: 'Dmytro', title: "Post", text: "Text" },
-            { id: 3, UserName: 'Dmytro', title: "PostPost", text: "Text Text" },
-            { id: 2, UserName: 'Dmytro', title: "PostPostPost", text: "Text Text Text" },
-            { id: 1, UserName: 'Dmytro', title: "PostPostPostPost", text: "Text Text Text Text" },
-        ],
-        newPostText: "Text for post",
-        profile: null
+    postData: [
+        { id: 4, UserName: 'Dmytro', title: "Post", text: "Text" },
+        { id: 3, UserName: 'Dmytro', title: "PostPost", text: "Text Text" },
+        { id: 2, UserName: 'Dmytro', title: "PostPostPost", text: "Text Text Text" },
+        { id: 1, UserName: 'Dmytro', title: "PostPostPostPost", text: "Text Text Text Text" },
+    ],
+    newPostText: "Text for post",
+    profile: null,
+    status: ""
 }
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST: {
-            let stateCopy = {...state};
+            let stateCopy = { ...state };
             if (stateCopy.newPostText.length > 3) {
                 let newPost = {
                     id: 5,
@@ -24,7 +28,7 @@ const profileReducer = (state = initialState, action) => {
                     UserName: "author",
                     title: stateCopy.newPostText
                 }
-                stateCopy.postData = [{...newPost}, ...state.postData];
+                stateCopy.postData = [{ ...newPost }, ...state.postData];
                 stateCopy.newPostText = "";
                 return stateCopy;
             } else {
@@ -32,18 +36,24 @@ const profileReducer = (state = initialState, action) => {
             }
         }
         case POST_WRITING: {
-            return{
-                    ...state,
-                    newPostText: action.value
+            return {
+                ...state,
+                newPostText: action.value
             }
         }
         case SET_USER_PROFILE: {
-            return{
-                    ...state,
-                    profile: action.value
+            return {
+                ...state,
+                profile: action.value
             }
         }
-        default: 
+        case SET_STATUS: {
+            return {
+                ...state,
+                status: action.value
+            }
+        }
+        default:
             return state;
     }
 }
@@ -85,4 +95,28 @@ export const setUserProfile = (profile) => {
     }
 }
 
+export const setStatus = (status) => {
+    return {
+        type: SET_STATUS, value: status
+    }
+}
+
+export const getStatus = (userId) => (dispatch) => {
+    profileAPI.getStatus(userId)
+        .then(response => {
+            dispatch(setStatus(response.data));
+        })
+}
+
+export const updateStatus = (status) => (dispatch) => {
+    profileAPI.updateStatus(status)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(setStatus(status));
+            }
+            else{
+                console.log(response.data.message);
+            }
+        })
+}
 export default profileReducer;

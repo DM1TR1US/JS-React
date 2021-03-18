@@ -20,10 +20,10 @@ const App = () => {
           <Navbar />
 
           <div className="mainContent_Block__content">
-            <Route path="/profile/:userId" render={() => <ProfileContainer  />}/>
+            <Route path="/profile/:userId?" render={() => <ProfileContainer  />}/>
             <Route path="/messages" render={() => <StructureDialog />} />
             <Route path="/users" render={() => <UsersContainer />} />
-            <Route path="/logn" render={() => <Login />} />
+            <Route path="/login" render={() => <Login />} />
           </div>
 
         </div>
