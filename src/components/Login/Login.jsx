@@ -1,14 +1,12 @@
 import React from 'react';
 import { Form, Field } from 'react-final-form'
+import { reqField } from '../../utils/validators/validators';
 
 const Login = () => {
 
-    let onSubmit = (formObj) => {
+    let onSubmit = (formObj) => { 
         console.log(formObj);
     }
-
-    const required = value => (value ? undefined : 'Required');
-
     return (
         <div>
             <Form
@@ -19,22 +17,24 @@ const Login = () => {
                         <div>
                             <Field
                                 name="email"
-                                validate={required}>
-                                {({ input }) => (
+                                validate={reqField}>
+                                {({ input, meta }) => (
                                     <div>
                                         <label>Email:</label>
                                         <input placeholder="Mail" type="email" {...input}/>
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
                                     </div>
                                 )}
 
                             </Field>
                             <Field
                                 name="password"
-                                validate={required}>
+                                validate={reqField}>
                                 {({ input, meta }) => (
                                     <div>
                                         <label>Password:</label>
                                         <input placeholder="Password" type="password" {...input}/>
+                                        {meta.error && meta.touched && <span>{meta.error}</span>}
                                     </div>
                                 )}
 
