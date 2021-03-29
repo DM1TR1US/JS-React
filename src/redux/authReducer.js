@@ -18,7 +18,6 @@ export const authReducer = (state = initialState, action) => {
             return{
                 ...state,
                 ...action.data,
-                isLogged: true
             }
         }
         case TOGGLE_FETCH: {
@@ -30,21 +29,42 @@ export const authReducer = (state = initialState, action) => {
 }
 
 export const getUserData = () => (dispatch) =>  {
-    loginAPI.isLogged()
+    loginAPI.isAuth()
     .then(response => {
        if(response.data.resultCode === 0){
            let {userId, login, mail} = response.data.data;
-           dispatchEvent(setUser(mail, userId, login));
+           dispatch(setUser(mail, userId, login, true));
        } 
     });
 }
 
 
-export const setUser = (mail, userId, login) => {
+export const setUser = (mail, userId, login, isLogged) => {
     return {
-        type: SET_USER, data:{ mail, userId, login}
+        type: SET_USER, data:{ mail, userId, login, isLogged}
     }
 }
 export const changeFetch = (isFetching) => ({ type: TOGGLE_FETCH, isFetching });
+
+
+export const login = (email, password, rememember) => (dispatch) => {
+    loginAPI.login(email,password,rememember)
+        .then(response => {
+            if(response.data.resultCode === 0){
+                dispatch(getUserData());
+            }else{
+                alert(response.data.messages[0])
+            }
+        })
+}
+
+export const logout = () => (dispatch) => {
+    loginAPI.logout()
+        .then(response => {
+            if(response.resultCode === 0){
+                dispatch(setUser(null, null, null, false));
+            }
+        })
+}
 
 export default authReducer;

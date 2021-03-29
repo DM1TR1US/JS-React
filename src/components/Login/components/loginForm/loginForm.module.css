@@ -1,0 +1,26 @@
+form div {
+display: flex;
+flex-direction: column;
+line-height: 2em;
+margin: 5px;
+}
+form input,
+form select,
+form textarea {
+    flex: 1;
+    padding: 3px 5px;
+    font-size: 1em;
+    margin-left: 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+form input[type='checkbox'] {
+    margin-top: 7px;
+}
+
+form span {
+    line-height: 32px;
+    margin-left: 10px;
+    color: #800;
+    font-weight: bold;
+}

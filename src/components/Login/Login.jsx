@@ -1,59 +1,31 @@
 import React from 'react';
-import { Form, Field } from 'react-final-form'
-import { reqField } from '../../utils/validators/validators';
+import s from './Login.module.css';
+import { connect } from 'react-redux';
+import { login, logout } from '../../redux/authReducer';
+import LoginForm from './components/loginForm/loginForm';
+import LogoutForm from './components/logoutForm/logoutForm';
+import { Redirect } from 'react-router';
 
-const Login = () => {
+const Login = (props) => {
 
-    let onSubmit = (formObj) => { 
+    let onSubmit = (formObj) => {
         console.log(formObj);
+        props.login(formObj.email, formObj.password, formObj.isRemember || false);
     }
-    return (
-        <div>
-            <Form
-                onSubmit={onSubmit}
-                subscription={{ submitting: true, pristine: true }}
-                render={({ handleSubmit, submitting, pristine }) => (
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <Field
-                                name="email"
-                                validate={reqField}>
-                                {({ input, meta }) => (
-                                    <div>
-                                        <label>Email:</label>
-                                        <input placeholder="Mail" type="email" {...input}/>
-                                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    </div>
-                                )}
 
-                            </Field>
-                            <Field
-                                name="password"
-                                validate={reqField}>
-                                {({ input, meta }) => (
-                                    <div>
-                                        <label>Password:</label>
-                                        <input placeholder="Password" type="password" {...input}/>
-                                        {meta.error && meta.touched && <span>{meta.error}</span>}
-                                    </div>
-                                )}
-
-                            </Field>
-                            <div>
-                                <label>Rememeber me</label>
-                                <Field
-                                    name="isRemember"
-                                    component="input"
-                                    type="checkbox"
-                                />
-                            </div>
-                            <button type="submit" disabled={submitting || pristine}>Log in</button>
-                        </div>
-                    </form>
-                )}
-            />
-        </div>
-    )
+    return props.isLogged ?
+        (<div>
+            <Redirect to={"/profile"} />
+        </div>)
+        :
+        (<div>
+            <LoginForm onSubmit = {onSubmit} />
+        </div>)
+        ;
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+    isLogged: state.auth.isLogged
+})
+
+export default connect(mapStateToProps, { login, logout })(Login);
